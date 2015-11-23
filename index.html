@@ -33,28 +33,24 @@
 			}
 		</script>
 	</head>
-	<body>
+	<body style="padding-top:10px">
 		<div class="container-fluid">
-			<div class="row">
-				<div class="alert alert-info">
-					Use this to get the next suggestion for hacking in Fallout 4
-				</div>
+			<div class="alert alert-info">
+				Use this to get the next suggestion for hacking in Fallout 4
 			</div>
-			<div class="row">
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<div class="input-group">
-							<input type="text" id="wordlist" class="form-control" placeholder="Words (separated by space)" />
-						</div>
-						<div class="input-group">
-							<input type="text" id="recommendation" class="form-control" placeholder="Recommendation" disabled />
-						</div>
-						<div class="input-group">
-							<input type="text" id="matchCount" class="form-control" placeholder="Likeness (0 for first guess)" value="0" />
-						</div>
-						<div class="btn-group">
-							<button type="button" class="btn btn-success" onclick="recommendGuess()">Recommend Guess</button>
-						</div>
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="form-group">
+						<input type="text" id="wordlist" class="form-control" placeholder="Words (separated by space)" />
+					</div>
+					<div class="form-group">
+						<input type="text" id="recommendation" class="form-control" placeholder="Recommendation" disabled />
+					</div>
+					<div class="form-group">
+						<input type="text" id="matchCount" class="form-control" placeholder="Likeness (0 for first guess)" value="0" />
+					</div>
+					<div class="btn-group">
+						<button type="button" class="btn btn-success" onclick="recommendGuess()">Recommend Guess</button>
 					</div>
 				</div>
 			</div>
