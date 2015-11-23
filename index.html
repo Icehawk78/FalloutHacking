@@ -1,0 +1,63 @@
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Fallout Hacking</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<script>
+			function recommendGuess() {
+				var wordlist = $('#wordlist').val().split(' ');
+				var lastRecommendation = $('#recommendation').val();
+				var matchCount = parseInt($('#matchCount').val());
+				wordlist = wordlist.filter(function(w) {
+					return matchingCharacters(lastRecommendation, w) == matchCount;
+				});
+				console.log('FILTERED:',wordlist);
+				wordlist = _.sortBy(wordlist, function(a) {
+					return -1 * _.without(wordlist, a).reduce(function(sum, b) {return sum + matchingCharacters(a, b)}, 0);
+				});
+				console.log('SORTED:',wordlist);
+				$('#recommendation').val(wordlist[0]);
+				$('#wordlist').val(wordlist.join(' '));
+			}
+			
+			function matchingCharacters(a, b) {
+				var matches = 0;
+				for (var i=0; i<a.length; i++) {
+					matches += a[i] == b[i] ? 1 : 0;
+				}
+				console.log(a, b, matches);
+				return matches;
+			}
+		</script>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="alert alert-info">
+					Use this to get the next suggestion for hacking in Fallout 4
+				</div>
+			</div>
+			<div class="row">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="input-group">
+							<input type="text" id="wordlist" class="form-control" placeholder="Words (separated by space)" />
+						</div>
+						<div class="input-group">
+							<input type="text" id="recommendation" class="form-control" placeholder="Recommendation" disabled />
+						</div>
+						<div class="input-group">
+							<input type="text" id="matchCount" class="form-control" placeholder="Likeness (0 for first guess)" value="0" />
+						</div>
+						<div class="btn-group">
+							<button type="button" class="btn btn-success" onclick="recommendGuess()">Recommend Guess</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
